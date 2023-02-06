@@ -1,11 +1,15 @@
 import { useMemo } from "react";
-import { Fixture, Player } from "./score-box";
+import { Player } from "./score-box";
 import {
   PlayerRowContainer,
   PlayerFlagContainer,
   PlayerNameContainer,
 } from "./player-row.css";
-import { GameContainer } from "./score-box.css";
+import {
+  GameContainer as GamePointsContainer,
+  PointsContainer,
+} from "./score-box.css";
+import { Fixture } from "../services/mock-score-service";
 
 interface IProps {
   player: Player;
@@ -13,34 +17,36 @@ interface IProps {
 }
 
 export function PlayerRow(props: IProps) {
-  const setWon = useMemo(() => {
-    let won = 0;
-    for (const set of props.fixture.sets) {
-      if (
-        set.playerScores[0].playerId == props.player.id &&
-        set.playerScores[0].games >= 6 &&
-        set.playerScores[0].games - set.playerScores[1].games >= 2
-      ) {
-        won++;
-      } else if (
-        set.playerScores[1].playerId == props.player.id &&
-        set.playerScores[1].games >= 6 &&
-        set.playerScores[1].games - set.playerScores[0].games >= 2
-      ) {
-        won++;
-      }
-    }
-    return won;
-  }, [props.player.id, props.fixture]);
-
-  const gamesPerSet = useMemo(() => {
+  const setSummaries = useMemo(() => {
     let summaries = [];
     for (const set of props.fixture.sets) {
-      summaries.push(
-        set.playerScores.find((s) => s.playerId === props.player.id)?.games ?? 0
-      );
+      summaries.push({
+        games: set.games.reduce(
+          (curr, g) => (g.winnerPlayerId === props.player.id ? 1 : 0) + curr,
+          0
+        ),
+        won: set.winnerPlayerId === props.player.id,
+      });
     }
     return summaries;
+  }, [props.player.id, props.fixture]);
+
+  const currentGamePoints = useMemo(() => {
+    const isFirstPlayer = props.fixture.firstPlayerId === props.player.id;
+    if (props.fixture.sets.length > 0) {
+      const currentSet = props.fixture.sets[props.fixture.sets.length - 1];
+      if (currentSet.winnerPlayerId === undefined) {
+        if (currentSet.games.length > 0) {
+          const currentGame = currentSet.games[currentSet.games.length - 1];
+          if (currentGame.winnerPlayerId === undefined) {
+            return isFirstPlayer
+              ? currentGame.firstPlayerPoints
+              : currentGame.secondPlayerPoints;
+          }
+        }
+      }
+    }
+    return undefined;
   }, [props.player.id, props.fixture]);
 
   return (
@@ -51,13 +57,22 @@ export function PlayerRow(props: IProps) {
         src={props.player.flag}
       />
       <div className={PlayerNameContainer}>{props.player.name}</div>
-      {/* TODO: compact different viewing mode */}
-      {/* <div>Won {setWon} sets</div> */}
-      {gamesPerSet.map((games, index) => (
-        <div className={GameContainer} key={index}>
-          {games}
+
+      {/* TODO: animated as it appears */}
+      {setSummaries.map((setSummary, index) => (
+        <div
+          className={GamePointsContainer}
+          style={{ color: setSummary.won ? "#2594b9" : undefined }}
+          key={index}
+        >
+          {setSummary.games}
         </div>
       ))}
+
+      {/* TODO: animated as it appears/disappears */}
+      {currentGamePoints && (
+        <div className={PointsContainer}>{currentGamePoints}</div>
+      )}
     </div>
   );
 }

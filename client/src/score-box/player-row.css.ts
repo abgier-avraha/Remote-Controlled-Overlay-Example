@@ -7,12 +7,13 @@ export const PlayerRowContainer = style({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
+  fontSize: "20px",
+  fontWeight: "700",
 });
 
 export const PlayerFlagContainer = style({
   height: "20px",
-  width: "30px",
-  padding: "1px",
+  width: "25px",
 });
 
 export const PlayerNameContainer = style({

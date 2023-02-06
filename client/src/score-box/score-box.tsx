@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { useMockFixture } from "../services/mock-score-service";
 import { PlayerRow } from "./player-row";
 import {
   ContainerHorizontalBorder,
@@ -7,23 +8,11 @@ import {
   ScoreBoxOuterContainer,
 } from "./score-box.css";
 
+// TODO: move tvo service
 export type Player = {
   id: number;
   name: string;
   flag: string;
-};
-
-export type Fixture = {
-  sets: Array<{
-    winnerPlayerId?: number;
-    setNumber: number;
-    isTieBreaker: boolean;
-    playerScores: Array<{
-      playerId: number;
-      games: number;
-      tiebreakerGames: number;
-    }>;
-  }>;
 };
 
 const players: Player[] = [
@@ -39,56 +28,23 @@ const players: Player[] = [
   },
 ];
 
-const fixture: Fixture = {
-  sets: [
-    {
-      setNumber: 1,
-      isTieBreaker: false,
-      playerScores: [
-        {
-          playerId: 0,
-          games: 5,
-          tiebreakerGames: 0,
-        },
-        {
-          playerId: 1,
-          games: 7,
-          tiebreakerGames: 0,
-        },
-      ],
-    },
-    {
-      setNumber: 2,
-      isTieBreaker: false,
-      playerScores: [
-        {
-          playerId: 0,
-          games: 3,
-          tiebreakerGames: 0,
-        },
-        {
-          playerId: 1,
-          games: 2,
-          tiebreakerGames: 0,
-        },
-      ],
-    },
-  ],
-};
-
 export function ScoreBox() {
+  const fixture = useMockFixture();
+
   return (
     <div className={ScoreBoxOuterContainer}>
-      <div className={ContainerHorizontalBorder} />
       <div className={ScoreBoxInnerContainer}>
-        {players.map((player, index) => (
-          <Fragment key={player.id}>
-            <PlayerRow player={player} fixture={fixture} />
-            {index === 0 && <div className={PlayerRowDivider} />}
-          </Fragment>
-        ))}
+        <div className={ContainerHorizontalBorder} />
+        <div>
+          {players.map((player, index) => (
+            <Fragment key={player.id}>
+              <PlayerRow player={player} fixture={fixture} />
+              {index === 0 && <div className={PlayerRowDivider} />}
+            </Fragment>
+          ))}
+        </div>
+        <div className={ContainerHorizontalBorder} />
       </div>
-      <div className={ContainerHorizontalBorder} />
     </div>
   );
 }

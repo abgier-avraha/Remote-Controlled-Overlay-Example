@@ -14,14 +14,17 @@ export const ScoreBoxOuterContainer = style({
 });
 
 export const ContainerHorizontalBorder = style({
-  width: "10px",
+  width: "5px",
   backgroundColor: "rgb(0,27,46)",
   background:
-    "linear-gradient(0deg, rgba(0,27,46,1) 0%, rgba(15,64,89,1) 50%, rgba(0,27,46,1) 100%)",
+    "linear-gradient(0deg, rgba(0,27,46,1) 0%, #1b9cc9 50%, rgba(0,27,46,1) 100%)",
+  margin: "0px 2px",
 });
 
 export const ScoreBoxInnerContainer = style({
   background: "#000d11",
+  display: "flex",
+  flexDirection: "row",
 });
 
 export const PlayerRowDivider = style({
@@ -32,5 +35,15 @@ export const PlayerRowDivider = style({
 });
 
 export const GameContainer = style({
-  width: "20px",
+  width: "35px",
+  textAlign: "center",
+});
+
+export const PointsContainer = style({
+  width: "35px",
+  textAlign: "center",
+  background: "white",
+  color: "black",
+  boxShadow: "inset 0 5px 10px rgba(0,0,0,0.25)",
+  borderRadius: "2px",
 });
