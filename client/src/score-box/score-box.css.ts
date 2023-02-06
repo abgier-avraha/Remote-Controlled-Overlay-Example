@@ -33,17 +33,3 @@ export const PlayerRowDivider = style({
   background:
     "linear-gradient(90deg, rgba(0,10,25,1) 0%, rgba(58,67,71,1) 70%, rgba(0,10,25,1) 100%)",
 });
-
-export const GameContainer = style({
-  width: "35px",
-  textAlign: "center",
-});
-
-export const PointsContainer = style({
-  width: "35px",
-  textAlign: "center",
-  background: "white",
-  color: "black",
-  boxShadow: "inset 0 5px 10px rgba(0,0,0,0.25)",
-  borderRadius: "2px",
-});

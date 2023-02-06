@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useMockFixture() {
   const fixtures = [fixture1, fixture2, fixture3, fixture4];
 
   const [fixture, setFixture] = useState({ index: 0, value: fixtures[0] });
 
-  setInterval(() => {
-    setFixture((o) => ({
-      index: o.index + 1,
-      value: fixtures[(o.index + 1) % fixtures.length],
-    }));
-  }, 2000);
+  useEffect(() => {
+    const int = setInterval(() => {
+      setFixture((o) => ({
+        index: o.index + 1,
+        value: fixtures[(o.index + 1) % fixtures.length],
+      }));
+    }, 2000);
+
+    return () => clearInterval(int);
+  }, []);
 
   return fixture.value;
 }

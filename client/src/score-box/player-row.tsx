@@ -4,11 +4,10 @@ import {
   PlayerRowContainer,
   PlayerFlagContainer,
   PlayerNameContainer,
-} from "./player-row.css";
-import {
-  GameContainer as GamePointsContainer,
   PointsContainer,
-} from "./score-box.css";
+  GamePointsContainer,
+  PointsContainerEmpty,
+} from "./player-row.css";
 import { Fixture } from "../services/mock-score-service";
 
 interface IProps {
@@ -70,9 +69,16 @@ export function PlayerRow(props: IProps) {
       ))}
 
       {/* TODO: animated as it appears/disappears */}
-      {currentGamePoints && (
-        <div className={PointsContainer}>{currentGamePoints}</div>
-      )}
+
+      <div
+        className={[
+          PointsContainer,
+          currentGamePoints === undefined && PointsContainerEmpty,
+        ].join(" ")}
+      >
+        {/* -1 should never appear, 'PointsContainerEmpty' will hide it. It just exist to consume space */}
+        <div>{currentGamePoints ?? -1}</div>
+      </div>
     </div>
   );
 }
