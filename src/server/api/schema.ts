@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+export const PlayerSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  flag: z.string(),
+});
+
 export const PointsEnum = z.enum(["0", "15", "30", "40", "AD"]);
 
 export const GameSchema = z.object({
@@ -21,6 +27,7 @@ export const SetSchema = z.object({
 });
 
 export const FixtureSchema = z.object({
+  players: PlayerSchema.array(),
   firstPlayerId: z.number(),
   secondPlayerId: z.number(),
   servingPlayerId: z.number(),

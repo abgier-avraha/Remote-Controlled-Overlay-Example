@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import type { Player } from "./score-box";
 import {
   PlayerRowContainer,
   PlayerFlagContainer,
@@ -9,10 +8,10 @@ import {
   PointsContainerEmpty,
 } from "./player-row.css";
 import type { z } from "zod";
-import type { FixtureSchema } from "../../../server/api/schema";
+import type { FixtureSchema, PlayerSchema } from "../../../server/api/schema";
 
 interface IProps {
-  player: Player;
+  player: z.infer<typeof PlayerSchema>;
   fixture: z.infer<typeof FixtureSchema>;
 }
 

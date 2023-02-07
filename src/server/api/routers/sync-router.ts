@@ -4,6 +4,18 @@ import { FixtureSchema } from "../schema";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 let FixtureState: z.infer<typeof FixtureSchema> = {
+  players: [
+    {
+      id: 0,
+      name: "NADAL",
+      flag: "https://www.sciencekids.co.nz/images/pictures/flags96/Spain.jpg",
+    },
+    {
+      id: 1,
+      name: "FEDERER",
+      flag: "https://www.sciencekids.co.nz/images/pictures/flags96/Switzerland.jpg",
+    },
+  ],
   firstPlayerId: 0,
   secondPlayerId: 1,
   servingPlayerId: 0,
