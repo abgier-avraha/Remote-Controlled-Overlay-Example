@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useMockFixture } from "../services/mock-score-service";
+import { useMockFixture } from "../../services/mock-score-service";
 import { PlayerRow } from "./player-row";
 import {
   ContainerHorizontalBorder,

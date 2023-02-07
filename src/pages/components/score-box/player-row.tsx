@@ -8,7 +8,7 @@ import {
   GamePointsContainer,
   PointsContainerEmpty,
 } from "./player-row.css";
-import { Fixture } from "../services/mock-score-service";
+import { Fixture } from "../../services/mock-score-service";
 
 interface IProps {
   player: Player;
@@ -17,7 +17,7 @@ interface IProps {
 
 export function PlayerRow(props: IProps) {
   const setSummaries = useMemo(() => {
-    let summaries = [];
+    const summaries: { games: number; won: boolean }[] = [];
     for (const set of props.fixture.sets) {
       summaries.push({
         games: set.games.reduce(
@@ -33,10 +33,10 @@ export function PlayerRow(props: IProps) {
   const currentGamePoints = useMemo(() => {
     const isFirstPlayer = props.fixture.firstPlayerId === props.player.id;
     if (props.fixture.sets.length > 0) {
-      const currentSet = props.fixture.sets[props.fixture.sets.length - 1];
+      const currentSet = props.fixture.sets[props.fixture.sets.length - 1]!;
       if (currentSet.winnerPlayerId === undefined) {
         if (currentSet.games.length > 0) {
-          const currentGame = currentSet.games[currentSet.games.length - 1];
+          const currentGame = currentSet.games[currentSet.games.length - 1]!;
           if (currentGame.winnerPlayerId === undefined) {
             return isFirstPlayer
               ? currentGame.firstPlayerPoints
