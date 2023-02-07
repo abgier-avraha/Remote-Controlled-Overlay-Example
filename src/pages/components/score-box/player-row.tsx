@@ -57,7 +57,6 @@ export function PlayerRow(props: IProps) {
       />
       <div className={PlayerNameContainer}>{props.player.name}</div>
 
-      {/* TODO: animated as it appears */}
       {setSummaries.map((setSummary, index) => (
         <div
           className={GamePointsContainer}
@@ -67,8 +66,6 @@ export function PlayerRow(props: IProps) {
           {setSummary.games}
         </div>
       ))}
-
-      {/* TODO: animated as it appears/disappears */}
 
       <div
         className={[
