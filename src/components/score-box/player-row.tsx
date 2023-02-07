@@ -8,8 +8,8 @@ import {
   PointsContainerEmpty,
 } from "./player-row.css";
 import type { z } from "zod";
-import type { FixtureSchema, PlayerSchema } from "../../../server/api/schema";
 import servingPNG from "./serving.png";
+import type { PlayerSchema, FixtureSchema } from "../../server/api/schema";
 
 interface IProps {
   player: z.infer<typeof PlayerSchema>;
@@ -58,9 +58,20 @@ export function PlayerRow(props: IProps) {
       />
       <div className={PlayerNameContainer}>{props.player.name}</div>
 
-      <div style={{ height: "18px", width: "18px" }}>
+      <div
+        style={{
+          height: "80%",
+          width: "18px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {props.player.id === props.fixture.servingPlayerId && (
-          <img style={{ height: "100%", width: "100%" }} src={servingPNG.src} />
+          <img
+            style={{ height: "100%", width: "100%", objectFit: "contain" }}
+            src={servingPNG.src}
+          />
         )}
       </div>
 

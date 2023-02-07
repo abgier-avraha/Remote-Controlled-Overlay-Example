@@ -1,8 +1,9 @@
 import { type NextPage } from "next";
 import { api } from "../utils/api";
-import { ScoreBox } from "./components/score-box/score-box";
 import Head from "next/head";
 import { useEffect } from "react";
+import { ScoreBox } from "../components/score-box/score-box";
+import { Container } from "../styles/index.css";
 
 const Home: NextPage = () => {
   const fixtureFetcher = api.sync.get.useQuery();
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div>
+    <div className={Container}>
       <Head>
         <title>Tennis Overlay Client</title>
       </Head>

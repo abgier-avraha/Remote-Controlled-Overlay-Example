@@ -1,7 +1,7 @@
 import { keyframes, style } from "@vanilla-extract/css";
 
 export const PlayerRowContainer = style({
-  padding: "2px 4px",
+  padding: "4px",
   color: "white",
   letterSpacing: "0.5px",
   display: "flex",

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import type { z } from "zod";
-import type { FixtureSchema } from "../../../server/api/schema";
+import type { FixtureSchema } from "../../server/api/schema";
 import { PlayerRow } from "./player-row";
 import {
   ContainerHorizontalBorder,

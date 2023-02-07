@@ -14,17 +14,17 @@ export const ScoreBoxOuterContainer = style({
 });
 
 export const ContainerHorizontalBorder = style({
-  width: "5px",
+  width: "4px",
   backgroundColor: "rgb(0,27,46)",
   background:
     "linear-gradient(0deg, rgba(0,27,46,1) 0%, #1b9cc9 50%, rgba(0,27,46,1) 100%)",
-  margin: "0px 2px",
 });
 
 export const ScoreBoxInnerContainer = style({
   background: "#000d11",
   display: "flex",
   flexDirection: "row",
+  padding: "0px 2px",
 });
 
 export const PlayerRowDivider = style({
