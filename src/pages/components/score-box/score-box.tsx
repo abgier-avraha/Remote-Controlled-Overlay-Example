@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import { useMockFixture } from "../../services/mock-score-service";
+import type { z } from "zod";
+import type { FixtureSchema } from "../../../server/api/schema";
 import { PlayerRow } from "./player-row";
 import {
   ContainerHorizontalBorder,
@@ -28,9 +29,7 @@ const players: Player[] = [
   },
 ];
 
-export function ScoreBox() {
-  const fixture = useMockFixture();
-
+export function ScoreBox(props: { fixture: z.infer<typeof FixtureSchema> }) {
   return (
     <div className={ScoreBoxOuterContainer}>
       <div className={ScoreBoxInnerContainer}>
@@ -38,7 +37,7 @@ export function ScoreBox() {
         <div>
           {players.map((player, index) => (
             <Fragment key={player.id}>
-              <PlayerRow player={player} fixture={fixture} />
+              <PlayerRow player={player} fixture={props.fixture} />
               {index === 0 && <div className={PlayerRowDivider} />}
             </Fragment>
           ))}
