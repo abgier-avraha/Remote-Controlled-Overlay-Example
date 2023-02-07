@@ -21,8 +21,12 @@ export const PlayerNameContainer = style({
   width: "100px",
 });
 
-const widen = keyframes({
+const fadeInWiden = keyframes({
   "0%": {
+    opacity: 0,
+    maxWidth: "0px",
+  },
+  "20%": {
     opacity: 0,
     maxWidth: "0px",
   },
@@ -34,16 +38,20 @@ const widen = keyframes({
 
 export const GamePointsContainer = style({
   width: "35px",
-  animationName: widen,
-  animationDuration: "0.3s",
+  animationName: fadeInWiden,
+  animationDuration: "0.5s",
   animationTimingFunction: "ease-in-out",
   textAlign: "center",
   overflow: "hidden",
 });
 
 export const PointsContainer = style({
+  animationName: fadeInWiden,
+  animationDuration: "0.5s",
+  animationTimingFunction: "ease-in-out",
+  opacity: 1,
   width: "35px",
-  transition: "width 0.3s ease-in-out",
+  transition: "width 0.3s ease-in-out, opacity 0.3s ease-in-out",
   textAlign: "center",
   background: "white",
   color: "black",
@@ -53,6 +61,7 @@ export const PointsContainer = style({
 });
 
 export const PointsContainerEmpty = style({
+  opacity: 0,
   width: "0px",
   color: "rgba(0,0,0,0)",
 });

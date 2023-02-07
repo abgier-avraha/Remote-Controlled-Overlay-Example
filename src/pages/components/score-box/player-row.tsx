@@ -9,6 +9,7 @@ import {
 } from "./player-row.css";
 import type { z } from "zod";
 import type { FixtureSchema, PlayerSchema } from "../../../server/api/schema";
+import servingPNG from "./serving.png";
 
 interface IProps {
   player: z.infer<typeof PlayerSchema>;
@@ -56,6 +57,12 @@ export function PlayerRow(props: IProps) {
         src={props.player.flag}
       />
       <div className={PlayerNameContainer}>{props.player.name}</div>
+
+      <div style={{ height: "18px", width: "18px" }}>
+        {props.player.id === props.fixture.servingPlayerId && (
+          <img style={{ height: "100%", width: "100%" }} src={servingPNG.src} />
+        )}
+      </div>
 
       {setSummaries.map((setSummary, index) => (
         <div
