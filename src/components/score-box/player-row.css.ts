@@ -11,11 +11,6 @@ export const PlayerRowContainer = style({
   fontWeight: "700",
 });
 
-export const PlayerFlagContainer = style({
-  height: "20px",
-  width: "25px",
-});
-
 export const PlayerNameContainer = style({
   margin: "0px 8px",
   width: "100px",

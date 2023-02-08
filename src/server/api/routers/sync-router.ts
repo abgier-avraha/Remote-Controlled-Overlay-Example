@@ -6,22 +6,18 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 let FixtureState: z.infer<typeof FixtureSchema> = {
   players: [
     {
-      id: 0,
       name: "NADAL",
-      flag: "https://www.sciencekids.co.nz/images/pictures/flags96/Spain.jpg",
+      flag: "https://flagcdn.com/w80/es.png",
     },
     {
-      id: 1,
       name: "FEDERER",
-      flag: "https://www.sciencekids.co.nz/images/pictures/flags96/Switzerland.jpg",
+      flag: "https://flagcdn.com/w80/ch.png",
     },
   ],
-  firstPlayerId: 0,
-  secondPlayerId: 1,
-  servingPlayerId: 0,
+  servingPlayerIndex: 0,
   sets: [
     {
-      winnerPlayerId: 0,
+      winnerPlayerIndex: 0,
       setNumber: 1,
       tiebreaker: {
         isTieBreaker: false,
@@ -30,42 +26,42 @@ let FixtureState: z.infer<typeof FixtureSchema> = {
       },
       games: [
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "15",
         },
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "15",
         },
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "30",
         },
         {
-          winnerPlayerId: 1,
+          winnerPlayerIndex: 1,
           firstPlayerPoints: "15",
           secondPlayerPoints: "40",
         },
         {
-          winnerPlayerId: 1,
+          winnerPlayerIndex: 1,
           firstPlayerPoints: "30",
           secondPlayerPoints: "40",
         },
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "0",
         },
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "0",
         },
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "0",
         },
@@ -80,12 +76,12 @@ let FixtureState: z.infer<typeof FixtureSchema> = {
       },
       games: [
         {
-          winnerPlayerId: 0,
+          winnerPlayerIndex: 0,
           firstPlayerPoints: "40",
           secondPlayerPoints: "0",
         },
         {
-          winnerPlayerId: 1,
+          winnerPlayerIndex: 1,
           firstPlayerPoints: "0",
           secondPlayerPoints: "40",
         },

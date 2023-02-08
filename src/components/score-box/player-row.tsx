@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useMemo } from "react";
 import {
   PlayerRowContainer,
-  PlayerFlagContainer,
   PlayerNameContainer,
   PointsContainer,
   GamePointsContainer,
@@ -9,10 +9,11 @@ import {
 } from "./player-row.css";
 import type { z } from "zod";
 import servingPNG from "./serving.png";
-import type { PlayerSchema, FixtureSchema } from "../../server/api/schema";
+import type { FixtureSchema } from "../../server/api/schema";
+import Image from "next/image";
 
 interface IProps {
-  player: z.infer<typeof PlayerSchema>;
+  playerIndex: number;
   fixture: z.infer<typeof FixtureSchema>;
 }
 
@@ -22,23 +23,23 @@ export function PlayerRow(props: IProps) {
     for (const set of props.fixture.sets) {
       summaries.push({
         games: set.games.reduce(
-          (curr, g) => (g.winnerPlayerId === props.player.id ? 1 : 0) + curr,
+          (acc, g) => (g.winnerPlayerIndex === props.playerIndex ? 1 : 0) + acc,
           0
         ),
-        won: set.winnerPlayerId === props.player.id,
+        won: set.winnerPlayerIndex === props.playerIndex,
       });
     }
     return summaries;
-  }, [props.player.id, props.fixture]);
+  }, [props.playerIndex, props.fixture]);
 
   const currentGamePoints = useMemo(() => {
-    const isFirstPlayer = props.fixture.firstPlayerId === props.player.id;
+    const isFirstPlayer = props.playerIndex === 0;
     if (props.fixture.sets.length > 0) {
       const currentSet = props.fixture.sets[props.fixture.sets.length - 1]!;
-      if (currentSet.winnerPlayerId === undefined) {
+      if (currentSet.winnerPlayerIndex === undefined) {
         if (currentSet.games.length > 0) {
           const currentGame = currentSet.games[currentSet.games.length - 1]!;
-          if (currentGame.winnerPlayerId === undefined) {
+          if (currentGame.winnerPlayerIndex === undefined) {
             return isFirstPlayer
               ? currentGame.firstPlayerPoints
               : currentGame.secondPlayerPoints;
@@ -47,16 +48,20 @@ export function PlayerRow(props: IProps) {
       }
     }
     return undefined;
-  }, [props.player.id, props.fixture]);
+  }, [props.playerIndex, props.fixture]);
 
   return (
     <div className={PlayerRowContainer}>
-      <img
-        className={PlayerFlagContainer}
+      <Image
+        alt="serving"
+        width={25}
+        height={20}
         style={{ objectFit: "contain" }}
-        src={props.player.flag}
+        src={props.fixture.players[props.playerIndex]?.flag ?? ""}
       />
-      <div className={PlayerNameContainer}>{props.player.name}</div>
+      <div className={PlayerNameContainer}>
+        {props.fixture.players[props.playerIndex]?.name}
+      </div>
 
       <div
         style={{
@@ -67,9 +72,12 @@ export function PlayerRow(props: IProps) {
           alignItems: "center",
         }}
       >
-        {props.player.id === props.fixture.servingPlayerId && (
-          <img
-            style={{ height: "100%", width: "100%", objectFit: "contain" }}
+        {props.playerIndex === props.fixture.servingPlayerIndex && (
+          <Image
+            alt="serving"
+            width={20}
+            height={20}
+            style={{ objectFit: "contain" }}
             src={servingPNG.src}
           />
         )}

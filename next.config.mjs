@@ -26,5 +26,6 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: { domains: ["flagcdn.com"], formats: ['image/avif', 'image/webp'], },
 };
 export default withVanillaExtract(config);

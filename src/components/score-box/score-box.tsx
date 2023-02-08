@@ -15,9 +15,9 @@ export function ScoreBox(props: { fixture: z.infer<typeof FixtureSchema> }) {
       <div className={ScoreBoxInnerContainer}>
         <div className={ContainerHorizontalBorder} />
         <div>
-          {props.fixture.players.map((player, index) => (
-            <Fragment key={player.id}>
-              <PlayerRow player={player} fixture={props.fixture} />
+          {props.fixture.players.map((_player, index) => (
+            <Fragment key={index}>
+              <PlayerRow playerIndex={index} fixture={props.fixture} />
               {index === 0 && <div className={PlayerRowDivider} />}
             </Fragment>
           ))}

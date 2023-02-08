@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const PlayerSchema = z.object({
-  id: z.number(),
   name: z.string(),
   flag: z.string(),
 });
@@ -9,14 +8,13 @@ export const PlayerSchema = z.object({
 export const PointsEnum = z.enum(["0", "15", "30", "40", "AD"]);
 
 export const GameSchema = z.object({
-  winnerPlayerId: z.number().optional(),
-  advantagePlayerId: z.number().optional(),
+  winnerPlayerIndex: z.number().optional(),
   firstPlayerPoints: PointsEnum,
   secondPlayerPoints: PointsEnum,
 });
 
 export const SetSchema = z.object({
-  winnerPlayerId: z.number().optional(),
+  winnerPlayerIndex: z.number().optional(),
   setNumber: z.number(),
   tiebreaker: z.object({
     isTieBreaker: z.boolean(),
@@ -28,8 +26,6 @@ export const SetSchema = z.object({
 
 export const FixtureSchema = z.object({
   players: PlayerSchema.array(),
-  firstPlayerId: z.number(),
-  secondPlayerId: z.number(),
-  servingPlayerId: z.number(),
+  servingPlayerIndex: z.number().optional(),
   sets: SetSchema.array(),
 });
