@@ -1,16 +1,12 @@
 import { style } from "@vanilla-extract/css";
 
 export const ScoreBoxOuterContainer = style({
-  position: "absolute",
-  bottom: "50px",
-  left: "100px",
-  padding: "4px",
-
-  background: "rgba(255, 255, 255, 0.2)",
   borderRadius: "4px",
   boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-  backdropFilter: "blur(5px)",
   border: "1px solid rgba(255, 255, 255, 0.3)",
+  display: "inline-block",
+  padding: "4px",
+  background: "rgba(255, 255, 255, 0.4)",
 });
 
 export const ContainerHorizontalBorder = style({

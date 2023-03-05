@@ -10,10 +10,10 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     // TODO: replace with webhook subscription
-    const t = setTimeout(() => {
+    const t = setInterval(() => {
       void fixtureFetcher.refetch();
     }, 1000);
-    return () => clearTimeout(t);
+    return () => clearInterval(t);
   }, [fixtureFetcher]);
 
   if (!fixtureFetcher.data) {
